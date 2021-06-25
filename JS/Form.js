@@ -42,8 +42,14 @@ class Form{
         });
     
         this.reset.mousePressed(()=>{
-          player.updateCount(0)
-          game.update(0)
+
+          var ref = database.ref("/");
+          ref.set({
+            playerCount:0,
+            gameState:0
+          })
+         // player.updateCount(0)
+         // game.update(0)
           //Player.updateCars(0)
         })
     

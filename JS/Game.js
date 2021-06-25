@@ -33,8 +33,8 @@ class Game {
         p2=createSprite(displayWidth-150, 365)
         p2.addImage(player2Img)
 
-        hoop = createSprite(displayWidth/2-100, displayHeight/2-250)
-        hoop.addImage(hoopImg)
+        //hoop = createSprite(displayWidth/2-100, displayHeight/2-250)
+        //hoop.addImage(hoopImg)
         
         quaffle=createSprite(displayWidth/2-100, displayHeight/2)
         quaffle.addImage(quaffImg)
@@ -43,7 +43,7 @@ class Game {
         quaffle.setCollider("circle", 0, 0, 85)
         
 
-    teams=[p1, p2]
+        teams=[p1, p2]
     }
     
    
@@ -64,7 +64,9 @@ class Game {
     
           //x and y position of the cars
           var x = -400 ;
-          var y=-100;
+          //var x = 100;
+         var y=-100;
+         //var y=500;
     
           for(var plr in allPlayers){
             //add 1 to the index for every loop
@@ -72,9 +74,10 @@ class Game {
     
             //position the cars a little away from each other in x direction
             x = x + displayWidth/2;
+            y = displayHeight-allPlayers[plr].distance
             //use data form the database to display the cars in y direction
          //   y = displayHeight - allPlayers[plr].distance;
-         y =  displayHeight/2
+         //y =  displayHeight/2
             teams[index-1].x = x;
             teams[index-1].y = y;
     
@@ -102,14 +105,23 @@ class Game {
             quaffle.velocityX=-4
             quaffle.velocityY=5
           }
-    
+
           quaffle.bounceOff(p1)
           quaffle.bounceOff(p2)
+          
+          if (keyIsDown(DOWN_ARROW) && player.index !== null) {
+            player.distance -= 10
+            player.update();
+        }
+        if (keyIsDown(UP_ARROW) && player.index !== null) {
+            player.distance += 10
+            player.update();
+        }
 
-        if(keyIsDown(UP_ARROW) && player.index !== null){
+       /* if(keyIsDown(UP_ARROW) && player.index !== null){
           player.y +=20
           player.update();
-        }
+        }*/
     
         if(player.distance > 3860){
           player.rank=player.rank+1
